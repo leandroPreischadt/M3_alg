@@ -1,31 +1,34 @@
 #include <iostream>
 #include "functions.cpp"
+#include <vector>
 
 using namespace std;
 
 int main() {
 
-    string file_name = "quiz.txt";
+    int num_files = 5;
+
+    vector<string> films = {"marvel.txt", "theLordOfTheRings.txt", "theImitationGame.txt", "spiderMan.txt", "backToTheFuture.txt"};
     
-    int index_films[NUM_FILES];
+    int index_films[films.size()];
 
     for (int i = 0; i < NUM_FILES; i++)
     {
         index_films[i] = -1;
     }
 
-    int num_films = 0;
+    int sup = 0;
 
     cout << "Bem vindo ao Quiz sobre filmes" << endl;
     cout << "Acerte as perguntas e acumule pontos" << endl;
     cout << "Boa sorte" << endl;
 
-    while (num_films < NUM_FILES)
+    while (sup < num_files)
     {
         cout << endl;
-        string film_sorted = pick_file(index_films);
+        string film_sorted = pick_file(films ,index_films, num_files);
         read_file(film_sorted);
-        num_films++;
+        sup++;
     } 
 
     cout << "Acabou os filmes" << endl;

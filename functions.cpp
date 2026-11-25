@@ -5,6 +5,8 @@
 
 using namespace std;
 
+
+
 void read_file(string movie_name)
 {
 
@@ -46,17 +48,16 @@ void user_score(string score_file)
 {
 }
 
-string pick_file(int index_films[NUM_FILES])
+string pick_file(const vector<string> &films, int index_films[], int num_files)
 {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> dist(0, NUM_FILES - 1);
+    uniform_int_distribution<int> dist(0, num_files - 1);
 
     int sorted;
     
-    
 
-    string films[NUM_FILES] = {"marvel.txt", "theLordOfTheRings.txt", "theImitationGame.txt", "spiderMan.txt", "backToTheFuture.txt"};
+    
 
     while (true)
     {
@@ -71,4 +72,8 @@ string pick_file(int index_films[NUM_FILES])
 
         return films[sorted];
     }
+}
+
+void index_films_organizer(int index_films[]) {
+
 }
