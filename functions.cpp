@@ -8,7 +8,11 @@
 
 using namespace std;
 
-
+bool check_answer(char answ);
+void index_films_organizer(int index_films[], int num_files);
+void read_file(string movie_name);
+void user_score(string score_file);
+string pick_file(const vector<string> &films, int index_films[], int num_files);
 
 void read_file(string movie_name)
 {
@@ -20,6 +24,7 @@ void read_file(string movie_name)
     int x = 0;
     
     char user_choice;
+    bool checked_choice;
 
     while (getline(fil, buffer))
     {
@@ -65,14 +70,16 @@ void read_file(string movie_name)
 
                 cin >> user_choice;
     
-                if (!isalpha(user_choice))
+                checked_choice = check_answer(user_choice);
+
+                if (!isalpha(user_choice) || !checked_choice)
                 {
                     cout << endl;
-                    cout << "A resposta deve ser uma letra" << endl;
+                    cout << "A resposta deve ser uma letra minúscula entre (a-d)" << endl;
                 }
 
                 
-            } while (!isalpha(user_choice));
+            } while (!isalpha(user_choice) || checked_choice == false);
             
             cout << endl;
         }
@@ -116,4 +123,14 @@ void index_films_organizer(int index_films[], int num_files) {
         index_films[i] = -1;
     }
 
+}
+
+bool check_answer(char answ) {
+
+    if (answ == 'a' || answ == 'b' || answ == 'c' || answ == 'd')
+    {
+        return true;
+    }
+
+    return false;
 }
