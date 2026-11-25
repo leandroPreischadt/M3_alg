@@ -19,7 +19,7 @@ void read_file(string movie_name)
         cout << buffer << endl;
         x++;
 
-        if (x == 6)
+        if (x == 5)
         {
             streampos pos = fil.tellg();
 
@@ -33,11 +33,6 @@ void read_file(string movie_name)
             cin >> choice;
             cout << endl;
         }
-    }
-
-    if (x == 5)
-    {
-        x = 0;
     }
 }
 
@@ -58,7 +53,7 @@ string pick_file(int index_films[NUM_FILES])
     {
         int sorted = dist(gen);
 
-        for (int i = 0; i < NUM_FILES - 1; i++)
+        for (int i = 0; i < NUM_FILES; i++)
         {
 
             if (sorted == index_films[i])
@@ -72,4 +67,3 @@ string pick_file(int index_films[NUM_FILES])
         }
     }
 }
-// Perguntar se pode usar vector
