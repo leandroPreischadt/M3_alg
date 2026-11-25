@@ -1,0 +1,5 @@
+O Jogo da Imitação: Qual máquina Alan Turing ajuda a construir para decifrar mensagens?
+a) Enigma
+b) Colossus
+c) Bombe
+d) Máquina de Turing  
