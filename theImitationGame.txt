@@ -3,3 +3,5 @@ a) Enigma
 b) Colossus
 c) Bombe
 d) Máquina de Turing  
+
+Resposta: c) Bombe

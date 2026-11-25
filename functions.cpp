@@ -16,6 +16,15 @@ void read_file(string movie_name)
 
     while (getline(fil, buffer))
     {
+        char choice;
+
+        if (x == 7)
+        {
+            // if choice == resposta -> ganhar pontos
+            cout << choice << endl;
+            cout << endl;
+        }
+
         cout << buffer << endl;
         x++;
 
@@ -23,9 +32,6 @@ void read_file(string movie_name)
         {
             streampos pos = fil.tellg();
 
-            x = 0;
-
-            char choice;
             fil.seekg(pos);
 
             cout << "Escolha a resposta entre as disponíveis: ";
@@ -40,12 +46,19 @@ void user_score(string score_file)
 {
 }
 
-string pick_file(int index_films[NUM_FILES])
+string pick_file()
 {
-
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<int> dist(0, NUM_FILES - 1);
+
+    int index_films[NUM_FILES];
+
+    for (int i = 0; i < NUM_FILES; i++)
+    {
+        index_films[i] = -1;
+    }
+    
 
     string films[NUM_FILES] = {"marvel.txt", "theLordOfTheRings.txt", "theImitationGame.txt", "spiderMan.txt", "backToTheFuture.txt"};
 
@@ -53,17 +66,13 @@ string pick_file(int index_films[NUM_FILES])
     {
         int sorted = dist(gen);
 
-        for (int i = 0; i < NUM_FILES; i++)
+        if (sorted == index_films[sorted])
         {
-
-            if (sorted == index_films[i])
-            {
-                continue;
-            }
-
-            index_films[sorted] = sorted;
-
-            return films[sorted];
+            continue;
         }
+
+        index_films[sorted] = sorted;
+
+        return films[sorted];
     }
 }
