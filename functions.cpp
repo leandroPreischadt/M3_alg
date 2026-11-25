@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <sstream>
+#include <cctype>
+
 #define NUM_FILES 5
 
 using namespace std;
@@ -15,15 +18,33 @@ void read_file(string movie_name)
     string buffer;
 
     int x = 0;
+    
+    char user_choice;
 
     while (getline(fil, buffer))
     {
-        char choice;
 
-        if (x == 7)
+        if (x == 6)
         {
-            // if choice == resposta -> ganhar pontos
-            cout << choice << endl;
+            x = 0;
+
+            string text;
+            char correct;
+
+            istringstream asw(buffer);
+
+            asw >> text >> correct;
+
+            if (user_choice == correct)
+            {
+                cout << "Você acertou!" << endl;
+
+                //chamar função de user_score
+
+            } else {
+                cout << "Você errou!" << endl;
+            }
+            
             cout << endl;
         }
 
@@ -36,9 +57,23 @@ void read_file(string movie_name)
 
             fil.seekg(pos);
 
-            cout << "Escolha a resposta entre as disponíveis: ";
+            
+            do
+            {
+                cout << endl;
+                cout << "Escolha a resposta entre as disponíveis: ";
 
-            cin >> choice;
+                cin >> user_choice;
+    
+                if (!isalpha(user_choice))
+                {
+                    cout << endl;
+                    cout << "A resposta deve ser uma letra" << endl;
+                }
+
+                
+            } while (!isalpha(user_choice));
+            
             cout << endl;
         }
     }

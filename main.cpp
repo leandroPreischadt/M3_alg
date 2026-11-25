@@ -31,7 +31,8 @@ int main() {
         sup++;
     } 
 
-    cout << "Acabou os filmes" << endl;
+    cout << endl;
+    cout << "Acabou as perguntas" << endl;
 
     return 0;
 }
