@@ -109,6 +109,11 @@ string pick_file(const vector<string> &films, int index_films[], int num_files)
     }
 }
 
-void index_films_organizer(int index_films[]) {
+void index_films_organizer(int index_films[], int num_files) {
+    
+    for (int i = 0; i < num_files; i++)
+    {
+        index_films[i] = -1;
+    }
 
 }

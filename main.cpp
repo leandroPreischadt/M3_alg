@@ -12,11 +12,8 @@ int main() {
     
     int index_films[films.size()];
 
-    for (int i = 0; i < NUM_FILES; i++)
-    {
-        index_films[i] = -1;
-    }
-
+    index_films_organizer(index_films, num_files);
+    
     int sup = 0;
 
     cout << "Bem vindo ao Quiz sobre filmes" << endl;
