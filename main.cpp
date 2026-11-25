@@ -7,6 +7,12 @@ int main() {
 
     string file_name = "quiz.txt";
     
+    int index_films[NUM_FILES];
+
+    for (int i = 0; i < NUM_FILES; i++)
+    {
+        index_films[i] = -1;
+    }
 
     int num_films = 0;
 
@@ -17,7 +23,7 @@ int main() {
     while (num_films < NUM_FILES)
     {
         cout << endl;
-        string film_sorted = pick_file();
+        string film_sorted = pick_file(index_films);
         read_file(film_sorted);
         num_films++;
     } 

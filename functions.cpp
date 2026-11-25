@@ -46,25 +46,21 @@ void user_score(string score_file)
 {
 }
 
-string pick_file()
+string pick_file(int index_films[NUM_FILES])
 {
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<int> dist(0, NUM_FILES - 1);
 
-    int index_films[NUM_FILES];
-
-    for (int i = 0; i < NUM_FILES; i++)
-    {
-        index_films[i] = -1;
-    }
+    int sorted;
+    
     
 
     string films[NUM_FILES] = {"marvel.txt", "theLordOfTheRings.txt", "theImitationGame.txt", "spiderMan.txt", "backToTheFuture.txt"};
 
     while (true)
     {
-        int sorted = dist(gen);
+        sorted = dist(gen);
 
         if (sorted == index_films[sorted])
         {
