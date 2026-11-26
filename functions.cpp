@@ -10,7 +10,7 @@ using namespace std;
 
 bool check_answer(char answ);
 void index_films_organizer(int index_films[], int num_files);
-void read_file(string movie_name, string score_file, string user_name);
+void read_file(string movie_name, string score_file, string user_name, int &user_score);
 int score(char user_choice, char correct);
 string pick_file(const vector<string> &films, int index_films[], int num_files);
 void score_marker(string score_file, int user_score, string user_name);
