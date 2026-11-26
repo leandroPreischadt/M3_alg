@@ -10,14 +10,15 @@ using namespace std;
 
 bool check_answer(char answ);
 void index_films_organizer(int index_films[], int num_files);
-void read_file(string movie_name);
+void read_file(string movie_name, string score_file, string user_name);
 int score(char user_choice, char correct);
 string pick_file(const vector<string> &films, int index_films[], int num_files);
+void score_marker(string score_file, int user_score, string user_name);
 
-void read_file(string movie_name)
+void read_file(string movie_name, string score_file, string user_name, int &user_score)
 {
 
-    ifstream fil(movie_name);
+    ifstream file(movie_name);
 
     string buffer;
 
@@ -25,9 +26,8 @@ void read_file(string movie_name)
 
     char user_choice;
     bool checked_choice;
-    int user_score;
-
-    while (getline(fil, buffer))
+    
+    while (getline(file, buffer))
     {
 
         if (x == 6)
@@ -41,7 +41,7 @@ void read_file(string movie_name)
 
             resp >> text >> correct;
 
-            user_score = score(user_choice, correct);
+            user_score += score(user_choice, correct);
 
             cout << endl;
         }
@@ -51,9 +51,9 @@ void read_file(string movie_name)
 
         if (x == 5)
         {
-            streampos pos = fil.tellg();
+            streampos pos = file.tellg();
 
-            fil.seekg(pos);
+            file.seekg(pos);
 
             do
             {
@@ -134,6 +134,65 @@ bool check_answer(char response)
     return false;
 }
 
-void score_file(string name_file) {
+void score_marker(string score_file, int user_score, string user_name)
+{
 
+    fstream file(score_file, std::ios::in | std::ios::out);
+
+    int score = 0;
+    string user;
+    string buffer;
+
+    int low_score = 5;
+
+    if (!file.is_open())
+    {
+        cout << "Não foi possível abrir o arquivo!" << endl;
+    }
+
+    if (!getline(file, buffer))
+    {
+        file.clear();
+
+        file.seekp(0, std::ios::beg);
+
+        file << user_name << ": " << user_score;
+
+        file.seekp(0, std::ios::beg);
+
+        file.close();
+    }
+
+    while (getline(file, buffer))
+    {
+        istringstream consult(buffer);
+
+        consult >> user >> score;
+
+        if (score < low_score)
+        {
+            low_score = score;
+        }
+        
+
+        if (score < user_score)
+        {
+            streampos pos = file.tellg();
+            file.seekp(pos);
+
+            file << user_name << ": " << user_score;
+            file.close();
+            break;
+        }
+        
+    }
+    if (user_score <= low_score)
+    {
+        file.clear();
+        
+        file.seekp(0, std::ios::end);
+        file << "\n";
+        file << user_name << ": " << user_score;
+        file.close();
+    }
 }
