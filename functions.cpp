@@ -11,7 +11,7 @@ using namespace std;
 bool check_answer(char answ);
 void index_films_organizer(int index_films[], int num_files);
 void read_file(string movie_name);
-void user_score(string score_file);
+int score(char user_choice, char correct);
 string pick_file(const vector<string> &films, int index_films[], int num_files);
 
 void read_file(string movie_name)
@@ -22,9 +22,10 @@ void read_file(string movie_name)
     string buffer;
 
     int x = 0;
-    
+
     char user_choice;
     bool checked_choice;
+    int user_score;
 
     while (getline(fil, buffer))
     {
@@ -36,20 +37,12 @@ void read_file(string movie_name)
             string text;
             char correct;
 
-            istringstream asw(buffer);
+            istringstream resp(buffer);
 
-            asw >> text >> correct;
+            resp >> text >> correct;
 
-            if (user_choice == correct)
-            {
-                cout << "Você acertou!" << endl;
+            user_score = score(user_choice, correct);
 
-                //chamar função de user_score
-
-            } else {
-                cout << "Você errou!" << endl;
-            }
-            
             cout << endl;
         }
 
@@ -62,14 +55,13 @@ void read_file(string movie_name)
 
             fil.seekg(pos);
 
-            
             do
             {
                 cout << endl;
                 cout << "Escolha a resposta entre as disponíveis: ";
 
                 cin >> user_choice;
-    
+
                 checked_choice = check_answer(user_choice);
 
                 if (!isalpha(user_choice) || !checked_choice)
@@ -78,16 +70,25 @@ void read_file(string movie_name)
                     cout << "A resposta deve ser uma letra minúscula entre (a-d)" << endl;
                 }
 
-                
             } while (!isalpha(user_choice) || checked_choice == false);
-            
+
             cout << endl;
         }
     }
 }
 
-void user_score(string score_file)
+int score(char user_choice, char correct)
 {
+
+    if (user_choice == correct)
+    {
+        cout << "Você acertou!" << endl;
+
+        return 1;
+    }
+
+    cout << "Você errou!" << endl;
+    return 0;
 }
 
 string pick_file(const vector<string> &films, int index_films[], int num_files)
@@ -97,9 +98,6 @@ string pick_file(const vector<string> &films, int index_films[], int num_files)
     uniform_int_distribution<int> dist(0, num_files - 1);
 
     int sorted;
-    
-
-    
 
     while (true)
     {
@@ -116,21 +114,26 @@ string pick_file(const vector<string> &films, int index_films[], int num_files)
     }
 }
 
-void index_films_organizer(int index_films[], int num_files) {
-    
+void index_films_organizer(int index_films[], int num_files)
+{
+
     for (int i = 0; i < num_files; i++)
     {
         index_films[i] = -1;
     }
-
 }
 
-bool check_answer(char answ) {
+bool check_answer(char response)
+{
 
-    if (answ == 'a' || answ == 'b' || answ == 'c' || answ == 'd')
+    if (response == 'a' || response == 'b' || response == 'c' || response == 'd')
     {
         return true;
     }
 
     return false;
+}
+
+void score_file(string name_file) {
+
 }
