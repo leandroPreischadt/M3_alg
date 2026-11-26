@@ -154,11 +154,7 @@ void score_marker(string score_file, int user_score, string user_name)
     {
         file.clear();
 
-        file.seekp(0, std::ios::beg);
-
         file << user_name << ": " << user_score;
-
-        file.seekp(0, std::ios::beg);
 
         file.close();
     }
@@ -174,7 +170,6 @@ void score_marker(string score_file, int user_score, string user_name)
             low_score = score;
         }
         
-
         if (score < user_score)
         {
             streampos pos = file.tellg();
